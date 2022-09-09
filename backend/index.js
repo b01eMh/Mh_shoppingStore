@@ -1,8 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cors = require('cors');
 const dbConfig = require('./config/dbConfig');
 const serverConfig = require('./config/serverConfig');
-const mongoose = require('mongoose');
 const Users = require('./models/userModel');
 
 const app = express();
@@ -11,15 +11,19 @@ mongoose
   .then(data => console.log('MongoDB is connected.'))
   .catch(err => console.log(`Error while connecting to MONGO DB: ${err}`));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors()); // enable CORS - API calls and resource sharing
+
+// Login
 app.post('/api/login', (req, res) => {
+  console.log('request ->', req.body);
   const reqBody = req.body;
   Users.findOne(reqBody, (err, data) => {
     console.log(data);
     if (err) {
       console.log(`Error on getting user from DB: ${err}`);
-      res.send(`Error on getting user from DB: ${err}`);
+      res.status(416).send(err);
       return;
     }
 
@@ -28,6 +32,7 @@ app.post('/api/login', (req, res) => {
   });
 });
 
+// Register
 app.post('/api/register', async (req, res) => {
   const reqBody = req.body;
   // console.log('register user data: ', reqBody);
