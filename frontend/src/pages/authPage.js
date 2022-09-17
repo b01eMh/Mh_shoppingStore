@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthService from '../services/AuthService';
+import RegisterForm from '../components/RegisterForm';
 
 function AuthPage() {
   const [username, setUsername] = React.useState('');
@@ -57,6 +58,7 @@ function AuthPage() {
         {!isFormValid ? <p>All fields are required.</p> : null}
         <input type="submit" value="send data" />
       </form>
+      {/* <RegisterForm /> */}
     </div>
   );
 }
