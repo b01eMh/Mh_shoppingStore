@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import AuthService from '../services/AuthService';
+import { Link } from 'react-router-dom';
+import AuthService from '../../services/authService';
 
 function RegisterForm() {
   const [userObj, setUserObj] = useState({
@@ -51,7 +52,8 @@ function RegisterForm() {
   };
 
   return (
-    <div>
+    <div className="auth-wrapper">
+      <h1>Auth register wrapper</h1>
       <form onSubmit={onSubmitForm}>
         <label htmlFor="username">User name</label>
         <input
@@ -60,7 +62,6 @@ function RegisterForm() {
           name="username"
           onChange={e => handleInputFieldChange(e)}
         />
-
         <label htmlFor="password">Password</label>
         <input
           id="password"
@@ -68,7 +69,6 @@ function RegisterForm() {
           name="password"
           onChange={e => handleInputFieldChange(e)}
         />
-
         <label htmlFor="email">E-mail</label>
         <input
           id="email"
@@ -76,7 +76,6 @@ function RegisterForm() {
           name="email"
           onChange={e => handleInputFieldChange(e)}
         />
-
         <label htmlFor="firstName">First name</label>
         <input
           id="firstName"
@@ -84,7 +83,6 @@ function RegisterForm() {
           name="firstName"
           onChange={e => handleInputFieldChange(e)}
         />
-
         <label htmlFor="lastName">Last name</label>
         <input
           id="lastName"
@@ -92,7 +90,6 @@ function RegisterForm() {
           name="lastName"
           onChange={e => handleInputFieldChange(e)}
         />
-
         <label htmlFor="address">Address</label>
         <input
           id="address"
@@ -100,7 +97,6 @@ function RegisterForm() {
           name="address"
           onChange={e => handleInputFieldChange(e)}
         />
-
         <label htmlFor="city">City</label>
         <input
           id="city"
@@ -108,8 +104,8 @@ function RegisterForm() {
           name="city"
           onChange={e => handleInputFieldChange(e)}
         />
-
-        <input type="submit" value="Register" />
+        <input type="submit" value="Register" /> <br />
+        <Link to="/auth">login</Link>
       </form>
       {!isFormValid ? <p>Invalid Form</p> : null}
 
