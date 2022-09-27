@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   postCode: { type: String },
   phoneNumber: { type: Number },
   isAdmin: { type: String, required: Boolean, default: false },
+  isActive: { type: String, required: Boolean, default: false },
 });
 
 const UserModel = mongoose.model('users', userSchema);

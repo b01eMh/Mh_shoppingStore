@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import AuthService from '../../services/authService';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/userSlice';
 
 function LoginForm() {
   const [userObj, setUserObj] = useState({
@@ -9,6 +12,7 @@ function LoginForm() {
   });
   const [isFormValid, setIsFormValid] = useState(true);
   const navigate = useNavigate();
+  const dispach = useDispatch();
 
   const onInputFieldChange = event => {
     let newUserObj = userObj;
@@ -28,9 +32,14 @@ function LoginForm() {
     // api call
     AuthService.login(userObj)
       .then(response => {
-        if (response && response.status === 200) {
-          console.log('API response ->', response);
+        if (
+          response &&
+          response.status === 200 &&
+          response.data !== 'User not found.'
+        ) {
+          // console.log('API response ->', response);
           localStorage.setItem('user', JSON.stringify(response.data));
+          dispach(setUser(response.data));
           navigate('/');
         }
       })
@@ -61,6 +70,8 @@ function LoginForm() {
         />
         {!isFormValid ? <p>All fields are required.</p> : null}
         <input type="submit" value="login" />
+        <br />
+        <Link to="/register">sign up</Link>
       </form>
     </div>
   );

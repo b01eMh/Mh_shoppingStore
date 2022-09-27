@@ -105,7 +105,7 @@ function RegisterForm() {
           onChange={e => handleInputFieldChange(e)}
         />
         <input type="submit" value="Register" /> <br />
-        <Link to="/auth">login</Link>
+        <Link to="/login">sign in</Link>
       </form>
       {!isFormValid ? <p>Invalid Form</p> : null}
 
