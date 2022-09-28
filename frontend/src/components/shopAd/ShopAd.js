@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './shopAd.scss';
 
 function ShopAd(props) {
@@ -15,6 +16,9 @@ function ShopAd(props) {
           <p className="shop-ad-title">{props.ad.title}</p>
           <p>Rate: {props.ad.rating.rate}</p>
           <p className="shop-ad-price">{props.ad.price}$</p>
+          <Link to={`/shop/ad/${props.ad.id}`}>
+            <p className="view-more-btn">View Product</p>
+          </Link>
         </div>
       ) : null}
     </div>

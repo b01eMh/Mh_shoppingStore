@@ -13,6 +13,7 @@ import RegisterForm from './components/register/RegisterForm';
 import LoginForm from './components/login/LoginForm';
 import Navigation from './components/navigation/Navigation';
 import ActivateUserPage from './pages/ActivateUserPage/ActivateUserPage';
+import Adpage from './pages/AdPage/Adpage';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 
@@ -21,7 +22,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (!localStorage.hasOwnProperty('user')) {
-      navigate('/auth');
+      // navigate('/auth');
     } else {
       dispatch(setUser(JSON.parse(localStorage.getItem('user'))));
     }
@@ -42,6 +43,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/shop" element={<ShopPage />} />
+        <Route path="/shop/ad/:adId" element={<Adpage />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/register" element={<RegisterForm />} />
