@@ -52,8 +52,8 @@ function RegisterForm() {
   };
 
   return (
-    <div className="auth-wrapper">
-      <h1>Auth register wrapper</h1>
+    <div className="auth-wrapper d-flex justify-content-center mt-4">
+      {/* <h1>Auth register wrapper</h1>
       <form onSubmit={onSubmitForm}>
         <label htmlFor="username">User name</label>
         <input
@@ -111,7 +111,109 @@ function RegisterForm() {
 
       {isApiFinish ? <p>Successfully registered.</p> : null}
 
-      {isApiError ? <p>Error please try later.</p> : null}
+      {isApiError ? <p>Error please try later.</p> : null} */}
+      <div className="card" style={{ width: 20 + 'rem' }}>
+        <div className="card-body">
+          <h5 className="card-title">Register page</h5>
+          <form onSubmit={event => onSubmitForm(event)}>
+            <div className="mb-3">
+              <label htmlFor="username" className="form-label">
+                Username
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="username"
+                id="username"
+                onChange={event => handleInputFieldChange(event)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="email"
+                id="email"
+                onChange={event => handleInputFieldChange(event)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="firstName" className="form-label">
+                First name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="firstName"
+                id="firstName"
+                onChange={event => handleInputFieldChange(event)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="lastName" className="form-label">
+                Last name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="lastName"
+                id="lastName"
+                onChange={event => handleInputFieldChange(event)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="address" className="form-label">
+                Address
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="address"
+                id="address"
+                onChange={event => handleInputFieldChange(event)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="city" className="form-label">
+                City
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="city"
+                id="city"
+                onChange={event => handleInputFieldChange(event)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                name="password"
+                id="password"
+                onChange={event => handleInputFieldChange(event)}
+              />
+            </div>
+            <div className="d-flex align-items-center">
+              <input type="submit" className="btn btn-primary" value="submit" />
+              <Link to="/login">
+                <div className="mx-3">or you have account.</div>
+              </Link>
+            </div>
+          </form>
+          {!isFormValid ? <p>Invalid Form</p> : null}
+
+          {isApiFinish ? <p>Successfully registered.</p> : null}
+
+          {isApiError ? <p>Error please try later.</p> : null}
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './shopAd.scss';
 
 function ShopAd(props) {
   // props cannot change
@@ -9,16 +8,22 @@ function ShopAd(props) {
   }, []);
 
   return (
-    <div className="shop-ad-wrapper col-md-3">
+    <div className="shop-ad-wrapper d-flex col-md-3">
       {props.ad ? (
-        <div>
-          <img src={props.ad.image} className="img img-fluid" />
-          <p className="shop-ad-title">{props.ad.title}</p>
-          <p>Rate: {props.ad.rating.rate}</p>
-          <p className="shop-ad-price">{props.ad.price}$</p>
-          <Link to={`/shop/ad/${props.ad.id}`}>
-            <p className="view-more-btn">View Product</p>
-          </Link>
+        <div className="card" style={{ width: 18 + 'rem' }}>
+          <img
+            src={props.ad.image}
+            className="card-img-top"
+            alt="Product image"
+          />
+          <div className="card-body">
+            <h5 className="card-title">{props.ad.title}</h5>
+            <p className="card-text">Rate: {props.ad.rating.rate}</p>
+            <p className="card-text">{props.ad.price}$</p>
+            <Link to={`/shop/ad/${props.ad.id}`}>
+              <p className="view-more-btn">View Product</p>
+            </Link>
+          </div>
         </div>
       ) : null}
     </div>

@@ -49,8 +49,8 @@ function LoginForm() {
   };
 
   return (
-    <div className="auth-wrapper">
-      <h1>Auth login wrapper</h1>
+    <div className="auth-wrapper d-flex justify-content-center mt-4">
+      {/* <h1>Auth login wrapper</h1>
       <form onSubmit={event => onSubmitForm(event)}>
         <label htmlFor="username">User name</label>
         <input
@@ -72,7 +72,45 @@ function LoginForm() {
         <input type="submit" value="login" />
         <br />
         <Link to="/register">sign up</Link>
-      </form>
+      </form> */}
+      <div className="card" style={{ width: 20 + 'rem' }}>
+        <div className="card-body">
+          <h5 className="card-title">Login page</h5>
+          <form onSubmit={event => onSubmitForm(event)}>
+            <div className="mb-3">
+              <label htmlFor="username" className="form-label">
+                Username
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="username"
+                id="username"
+                onChange={event => onInputFieldChange(event)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                name="password"
+                id="password"
+                onChange={event => onInputFieldChange(event)}
+              />
+            </div>
+            {!isFormValid ? <p>All fields are required.</p> : null}
+            <div className="d-flex align-items-center">
+              <input type="submit" className="btn btn-primary" value="submit" />
+              <Link to="/register">
+                <div className="mx-3">or sign up</div>
+              </Link>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
