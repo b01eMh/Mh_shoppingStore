@@ -8,13 +8,9 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       let newItem = action.payload;
-      console.log(newItem, 'state', state.cart[0]);
       let foundItemIndex;
       let foundItem = state.cart.find((item, index) => {
         if (item.id === newItem.id) {
-          if (!item.hasOwnProperty('count')) {
-            item.count = 1;
-          }
           foundItemIndex = index;
           return item;
         }
@@ -22,12 +18,21 @@ const cartSlice = createSlice({
       if (foundItem) {
         state.cart[foundItemIndex].count = state.cart[foundItemIndex].count + 1;
       } else {
+        newItem.count = 1;
         state.cart.push(newItem);
       }
       console.log(foundItem);
     },
+    removeItem: (state, action) => {
+      state.cart.splice(action.payload, 1);
+    },
+    handleCount: (state, action) => {
+      state.cart[action.payload.index].count = action.payload.isIncrement
+        ? state.cart[action.payload.index].count + 1
+        : state.cart[action.payload.index].count - 1;
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeItem, handleCount } = cartSlice.actions;
 export default cartSlice.reducer;
