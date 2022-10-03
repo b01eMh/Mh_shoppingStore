@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../../services/authService';
+import { routeConfig } from '../../config/routeCofig';
 
 function RegisterForm() {
   const [userObj, setUserObj] = useState({
@@ -202,7 +203,7 @@ function RegisterForm() {
             </div>
             <div className="d-flex align-items-center">
               <input type="submit" className="btn btn-primary" value="submit" />
-              <Link to="/login">
+              <Link to={routeConfig.LOGIN.url}>
                 <div className="mx-3">or you have account.</div>
               </Link>
             </div>

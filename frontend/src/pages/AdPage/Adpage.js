@@ -1,4 +1,4 @@
-import ViewAd from '../../components/ViewAd/ViewAd';
+import ViewAd from '../../components/viewAd/ViewAd';
 
 function Adpage() {
   return (

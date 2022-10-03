@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthService from '../../services/authService';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/userSlice';
+import { routeConfig } from '../../config/routeCofig';
 
 function LoginForm() {
   const [userObj, setUserObj] = useState({
@@ -104,7 +105,7 @@ function LoginForm() {
             {!isFormValid ? <p>All fields are required.</p> : null}
             <div className="d-flex align-items-center">
               <input type="submit" className="btn btn-primary" value="submit" />
-              <Link to="/register">
+              <Link to={routeConfig.REGISTER.url}>
                 <div className="mx-3">or sign up</div>
               </Link>
             </div>

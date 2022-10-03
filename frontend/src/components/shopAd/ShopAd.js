@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { routeConfig } from '../../config/routeCofig';
 
 function ShopAd(props) {
   // props cannot change
@@ -20,7 +21,7 @@ function ShopAd(props) {
             <h5 className="card-title">{props.ad.title}</h5>
             <p className="card-text">Rate: {props.ad.rating.rate}</p>
             <p className="card-text">{props.ad.price}$</p>
-            <Link to={`/shop/ad/${props.ad.id}`}>
+            <Link to={routeConfig.AD_SHOP.realUrl(props.ad.id)}>
               <p className="view-more-btn">View Product</p>
             </Link>
           </div>

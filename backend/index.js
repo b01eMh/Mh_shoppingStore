@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer');
 const dbConfig = require('./config/dbConfig');
 const serverConfig = require('./config/serverConfig');
 const Users = require('./models/userModel');
+const products = require('./fakeDb/products.json');
 
 const app = express();
 mongoose
@@ -101,6 +102,16 @@ app.post('/api/complete-registration', (req, res) => {
       res.send(result);
     }
   });
+});
+
+// top products for home page
+app.get('/api/top-products/:top', (req, res) => {
+  const topNumber = req.params.top;
+  const copyProducts = [...products];
+  const sorted = copyProducts.sort((a, b) => {
+    return b.rating.rate - a.rating.rate;
+  });
+  res.send(sorted.splice(0, topNumber));
 });
 
 app.listen(serverConfig.port, err => {

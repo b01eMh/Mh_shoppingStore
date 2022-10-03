@@ -8,6 +8,10 @@ class ShopService {
   static getAdById(adId) {
     return axios.get(`https://fakestoreapi.com/products/${adId}`);
   }
+
+  static getTopRateProduct(num) {
+    return axios.get(`/api/top-products/${num}`);
+  }
 }
 
 export default ShopService;
