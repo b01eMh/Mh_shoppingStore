@@ -27,7 +27,9 @@ function Navigation() {
             <button className="dropdown-item">Action</button>
           </li>
           <li>
-            <button className="dropdown-item">Another action</button>
+            <Link to="/my-products" className="dropdown-item">
+              My Ads
+            </Link>
           </li>
           <li>
             <button className="dropdown-item">Something else here</button>

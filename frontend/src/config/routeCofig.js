@@ -26,4 +26,18 @@ export const routeConfig = {
     url: '/user-activate/:id',
     realUrl: id => `/user-activate/${id}`,
   },
+  MY_PRODUCTS: {
+    url: '/my-products',
+  },
+  ADD_PRODUCT: {
+    url: '/add-product',
+  },
+  EDIT_PRODUCT: {
+    url: '/product/edit/:myProdId',
+    realUrl: myProdId => `/product/edit/${myProdId}`,
+  },
+  DELETE_PRODUCT: {
+    url: '/product/delete/:myProdId',
+    realUrl: myProdId => `/product/delete/${myProdId}`,
+  },
 };

@@ -14,6 +14,8 @@ import Navigation from './components/navigation/Navigation';
 import ActivateUserPage from './pages/ActivateUserPage/ActivateUserPage';
 import Adpage from './pages/AdPage/Adpage';
 import { routeConfig } from './config/routeCofig';
+import MyProducts from './pages/MyProducts/MyProducts';
+import AddEditProduct from './pages/AddEditProduct/AddEditProduct';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 
@@ -51,6 +53,16 @@ function App() {
           path={routeConfig.USER_ACTIVATE.url}
           element={<ActivateUserPage />}
         />
+        <Route path={routeConfig.MY_PRODUCTS.url} element={<MyProducts />} />
+        <Route
+          path={routeConfig.ADD_PRODUCT.url}
+          element={<AddEditProduct />}
+        />
+        <Route
+          path={routeConfig.EDIT_PRODUCT.url}
+          element={<AddEditProduct />}
+        />
+        {/* <Route path={routeConfig.DELETE_PRODUCT.url} element={<DeleteProduct />} /> */}
       </Routes>
     </div>
   );

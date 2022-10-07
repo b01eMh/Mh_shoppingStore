@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer');
 const dbConfig = require('./config/dbConfig');
 const serverConfig = require('./config/serverConfig');
 const Users = require('./models/userModel');
+const Product = require('./models/productModel');
 const products = require('./fakeDb/products.json');
 
 const app = express();
@@ -112,6 +113,75 @@ app.get('/api/top-products/:top', (req, res) => {
     return b.rating.rate - a.rating.rate;
   });
   res.send(sorted.splice(0, topNumber));
+});
+
+// add my product
+app.post('/api/product/add', (req, res) => {
+  const reqBody = req.body;
+  Product.findOne(reqBody, async (error, data) => {
+    if (error) {
+      const errorMsg = `Error on adding product: ${error}`;
+      console.log(errorMsg);
+      res.send(errorMsg);
+    }
+    if (data) {
+      res.send('Product already exist.');
+    } else {
+      const newProduct = new Product(reqBody);
+      const saveNewProduct = await newProduct.save();
+      console.log('Saved product ->', saveNewProduct);
+      res.send(saveNewProduct || 'Product not saved');
+    }
+  });
+});
+
+// get my products
+app.get('/api/product/my-adds/:userId', (req, res) => {
+  const id = req.params.userId;
+  Product.find({ userId: id }, (error, data) => {
+    if (error) {
+      console.log(error);
+      res.send(error);
+    }
+    res.send(data);
+  });
+});
+
+// get my product
+app.get('/api/product/myAd/:myProdId', (req, res) => {
+  const prodId = req.params.myProdId;
+
+  Product.findOne({ _id: prodId }, (error, data) => {
+    if (error) {
+      console.log(error);
+      res.send(error);
+    }
+    res.send(data);
+  });
+});
+
+// update product
+app.put('/api/product/save/:myProdId', (req, res) => {
+  const prodId = req.params.myProdId;
+  Product.updateOne({ _id: prodId }, req.body, (error, data) => {
+    if (error) {
+      console.log(error);
+      res.send(error);
+    }
+    res.send(data);
+  });
+});
+
+// delete my product
+app.delete('/api/product/delete/:myProdId', (req, res) => {
+  const prodId = req.params.myProdId;
+  Product.deleteOne({ _id: prodId }, error => {
+    if (error) {
+      console.log(error);
+      res.send(error);
+    }
+    res.send('Product deleted.');
+  });
 });
 
 app.listen(serverConfig.port, err => {
