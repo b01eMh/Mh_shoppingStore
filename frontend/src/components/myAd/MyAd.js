@@ -30,7 +30,12 @@ function MyAd({ product }) {
           >
             Edit
           </Link>
-          <button className="btn btn-danger btn-sm">Delete</button>
+          <Link
+            to={routeConfig.DELETE_PRODUCT.realUrl(product._id)}
+            className="btn btn-danger btn-sm"
+          >
+            Delete
+          </Link>
         </div>
       </div>
     </div>

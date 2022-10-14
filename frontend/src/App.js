@@ -16,6 +16,7 @@ import Adpage from './pages/AdPage/Adpage';
 import { routeConfig } from './config/routeCofig';
 import MyProducts from './pages/MyProducts/MyProducts';
 import AddEditProduct from './pages/AddEditProduct/AddEditProduct';
+import DeleteMyProduct from './pages/DeleteMyProduct/DeleteMyProduct';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 
@@ -62,7 +63,10 @@ function App() {
           path={routeConfig.EDIT_PRODUCT.url}
           element={<AddEditProduct />}
         />
-        {/* <Route path={routeConfig.DELETE_PRODUCT.url} element={<DeleteProduct />} /> */}
+        <Route
+          path={routeConfig.DELETE_PRODUCT.url}
+          element={<DeleteMyProduct />}
+        />
       </Routes>
     </div>
   );

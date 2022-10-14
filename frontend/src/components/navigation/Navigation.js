@@ -13,15 +13,15 @@ function Navigation() {
 
   const userBtnLayout = () => {
     return user.hasOwnProperty('username') ? (
-      <div className="dropdown">
-        <button
-          className="btn btn-secondary dropdown-toggle"
+      <div className="dropdown d-flex align-items-center">
+        <li
+          className="nav-item dropdown-toggle"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           {user.username}
-        </button>
+        </li>
         <ul className="dropdown-menu">
           <li>
             <button className="dropdown-item">Action</button>

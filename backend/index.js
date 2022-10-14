@@ -7,6 +7,7 @@ const serverConfig = require('./config/serverConfig');
 const Users = require('./models/userModel');
 const Product = require('./models/productModel');
 const products = require('./fakeDb/products.json');
+const Emails = require('./models/emailModel');
 
 const app = express();
 mongoose
@@ -103,6 +104,48 @@ app.post('/api/complete-registration', (req, res) => {
       res.send(result);
     }
   });
+});
+
+// contact message
+app.post('/api/send-message', async (req, res) => {
+  const reqBody = req.body;
+
+  // add to DB
+  const newMessage = new Emails(reqBody);
+  const saveNewMessage = await newMessage.save();
+
+  // nodemailer
+  let testAccount = await nodemailer.createTestAccount();
+
+  let transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass, // generated ethereal password
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: `${reqBody.firstName} ${reqBody.lastName} <${reqBody.email}>`, // sender address
+    to: 'onlineShop, office@onlineShop.com', // list of receivers
+    // subject: 'Activate account', // Subject line
+    // text: '', // plain text body
+    html: `
+          <p>
+            ${reqBody.message}
+          </p>
+        `, // html body
+  });
+
+  console.log('Preview URL:', nodemailer.getTestMessageUrl(info));
+
+  res.send(saveNewMessage || 'Message dont saved.');
 });
 
 // top products for home page
